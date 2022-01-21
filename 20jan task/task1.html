@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task1</title>
+</head>
+
+<body align=center>
+    <p>
+        <Write a code to merge 2 arrays in 3 different ways. Therefore your code will have 3 functions that will expect
+            2 array arguments and return the merged array,./p>
+            <p>Write a code to merge 2 arrays in 3 different ways. Therefore your code will have 3 functions that will
+                expect 2 array arguments and return the merged array,.</p>
+            <p id="demo"></p><br>
+            Using Array concat() Method:   <input type="button" value="function1" onclick="merge1();"><br>
+            <p id="demo2"></p>
+            <br><br>
+            Using spread Operator:  <input type="button" value="function2" onclick="merge2();"><br>
+            <p id="demo3"></p><br>
+            <br>
+            Using arrow function and for loop:  <input type="button" value="function3" onclick="merge3();"><br>
+            <p id="demo4"></p><br>
+            <br>
+            <script>
+                const arr1 = ['A', 'B', 'C', 'D'];
+                const arr2 = ['E', 'F', 'G', 'H'];
+                document.getElementById("demo").innerHTML = "Array 1 = " + arr1 + "<br>" + "Array 2 = " + arr2;
+
+                // Using Array concat() method
+                const arr3 = arr1.concat(arr2);
+
+                function merge1() {
+                    document.getElementById("demo2").innerHTML = arr3;
+                }
+                //Using Spread
+                const arr4 = [...arr1, ...arr2];
+
+                function merge2() {
+                    document.getElementById("demo3").innerHTML = arr4;
+                }
+                //Using simple for loop with arrow function
+                const arr5 = (arr1, arr2) => {
+                    for(let i=0; i<arr2.length; i++){
+                        arr1.push(arr2[i]);
+                    }
+                    return arr1;
+                }
+                
+                function merge3() {
+                    document.getElementById("demo4").innerHTML = arr5(arr1,arr2);
+                }      
+
+            </script>
+</body>
+
+</html>
