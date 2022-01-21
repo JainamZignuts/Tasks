@@ -19,15 +19,15 @@
   <p id="demo1"></p>
   <script>  
     function getInputValue(){    
-            var sum = document.getElementById("inputvalues").value;
-            const numbers = sum.split(",");
-            document.getElementById("demo").innerHTML = "string of numbers =" + numbers;
-            //executing for in loop
-             let txt = 0;
-             for (let x in numbers) {
-                 txt += parseInt(numbers[x]);
-             }
-           document.getElementById("demo1").innerHTML = "sum = " + txt;
+       var sum = document.getElementById("inputvalues").value;
+       const numbers = sum.split(",");
+       document.getElementById("demo").innerHTML = "string of numbers =" + numbers;
+       //executing for in loop
+       let txt = 0;
+       for (let x in numbers) {
+         txt += parseInt(numbers[x]);
+       }
+       document.getElementById("demo1").innerHTML = "sum = " + txt;
     }
   </script>
 </body>
