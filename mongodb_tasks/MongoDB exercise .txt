@@ -1,0 +1,158 @@
+MongoDB exercise solution
+
+
+// create database 
+
+       use tasks
+
+// ▪ Create a database with the following collections
+* Department - id, name, created date
+* Employee - id, name, emp_no, dept_id (refers to Department > id), join_date, end_date
+* Salary - id, emp_id (refers to Employee > id), month, year, amount,  generated_date
+
+Ans:
+               db.createCollection(“department”)
+               db.createCollection(“employee”)
+               db.createCollection(“salary”)
+
+//Write queries to insert data in the above collections.
+// insert data in department collection
+
+db.department.insert(
+    [
+    {
+         "dept_id":01,
+         "dept_name":"JS",
+         "created_date":"2022-01-27"
+    },
+    {
+         "dept_id":02,
+         "dept_name":"PHP",
+         "created_date":"2022-01-27"
+    },
+    {
+         "dept_id":03,
+         "dept_name":"JAVA",
+         "created_date":"2022-01-27"
+    }
+    ]
+ )
+
+
+// insert data in employee collection
+
+
+db.employee.insert([
+    {
+          emp_id: 01,
+          emp_name: ”Jainam Shah”,
+          emp_no: “9016654500”,
+          dept_id: 01,
+          join_date: "2022-01-27”,
+          end_date: ”2030-01-31”
+    },
+    {
+          emp_id: 02,
+          emp_name: ”Neer Rathod”,
+          emp_no: “9909560119”,
+          dept_id: 02,
+          join_date: "2022-01-27”,
+          end_date: ”2027-12-31”
+    },
+    {
+          emp_id: 03,
+          emp_name: ”Dhruv Raval”,
+          emp_no: “9824568500”,
+          dept_id: 03,
+          join_date: "2022-01-27”,
+          end_date: ”2025-06-30”
+    }
+    ])
+
+
+// insert data in salary collection
+
+
+db.salary.insert([
+    {
+          sal_id: 01,
+          emp_id: 01,
+          sal_month: "January",
+          sal_year: "2022",
+          amount: "20000",
+          generated_date: "2022-02-04"
+    },
+    {
+          sal_id: 02,
+          emp_id: 02,
+          sal_month: "January",
+          sal_year: "2022",
+          amount: "20500",
+          generated_date: "2022-02-04"
+    },
+    {
+          sal_id: 03,
+          emp_id: 03,
+          sal_month: "March",
+          sal_year: "2022",
+          amount: "25000",
+          generated_date: "2022-04-04"
+    }
+    ])
+
+
+// Write a query to get all employees details along with  department and salary details.
+db.employee.aggregate([
+          { 
+                 $lookup: 
+                      { 
+                             from: "department", 
+                             localField: "emp_id", 
+                             foreignField: "dept_id", 
+                             as: "es_id" 
+                       }
+            }, 
+            { 
+                 $lookup: 
+                       { 
+                             from: "salary", 
+                             localField: "emp_id", 
+                             foreignField: "sal_id", 
+                             as: "id" 
+                       }
+             } 
+]).pretty()
+
+
+
+// Write  queries to update data in the above collections.
+
+
+// Updated data in department collection
+
+db.department.update({‘dept_name’:’JAVA’},{$set:{‘dept’_name:’Ruby’}})
+
+// Updated data in employee collection
+
+db.employee.update({'emp_name': 'Dhruv Raval'}, { $set: {'emp_name': 'Darshan Kacha'} })
+
+// Updated data in salary collection
+
+db.salary.updateOne( 
+            {'sal_id': 03}, 
+            { $set: { 'amount': '20000','sal_month': 'April','generated_date': '2022-05-04'}} 
+)
+
+// Write  queries to delete data from the above collections.
+
+// Delete data in department collection
+
+db.department.remove( {'dept_name': 'Ruby'} )
+
+// Delete data in employee collection
+
+db.employee.remove( {'emp_id': 03} )
+
+// Delete data in salary collection
+
+db.salary.remove( {'sal_id': 03} )
